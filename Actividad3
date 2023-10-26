@@ -1,0 +1,59 @@
+void setup()
+{ 
+  
+  pinMode(7,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(11,INPUT);
+  pinMode(10,INPUT);
+}
+
+void loop()
+{
+     bool X,Z;
+  X=digitalRead(11); 
+  Z=digitalRead(10);
+  
+  if(X==HIGH && Z==LOW)
+   
+  {
+ digitalWrite(7,HIGH); 
+ delay(5000);  
+    
+ digitalWrite(6,HIGH); 
+ delay(1000);  
+    
+ digitalWrite(6,LOW);        
+ digitalWrite(7,LOW);  
+    
+ digitalWrite(5,HIGH); 
+ delay(3000);              
+ digitalWrite(5,LOW);               
+  
+ digitalWrite(6,HIGH); 
+ delay(1000);  
+ digitalWrite(6,LOW);               
+  }
+  
+   if(Z==HIGH && X==LOW){
+    digitalWrite(6,HIGH);
+    delay(500);
+    digitalWrite(6,LOW);
+    delay(500);
+   }
+  
+  if(X==HIGH && Z ==HIGH)
+  {
+    digitalWrite(6,HIGH);
+    delay(500);
+    digitalWrite(6,LOW);
+    delay(500);
+  }
+  else
+    
+  {
+    digitalWrite(7,LOW);
+    digitalWrite(6,LOW);
+    digitalWrite(5,LOW);
+ }
+}
