@@ -4,8 +4,8 @@ long int valorrecaudado = 0;
 int costo= 5000;
 
 bool subida1,subida2;
-const int botonIngresoPin = 11;  
-const int botonEgresoPin = 10;  
+const int botonIngresoPin = 4;  
+const int botonEgresoPin = 3;  
 const int led1 = 5;      
 const int led2 = 7;       
 
