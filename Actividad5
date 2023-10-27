@@ -31,11 +31,11 @@ void loop()
   if(ingreso == 1 && cuposdisponibles > 0 && subida1 == 0)
   {
     cuposdisponibles = cuposdisponibles -1;
-    Serial.print("Cupos: ");
+    Serial.print("\t\nCupos: ");
   	Serial.print(cuposdisponibles);
-  	Serial.print("\tRecaudo = $");
+  	Serial.print("\t\nRecaudo = $");
   	Serial.print(valorrecaudado);
-    Serial.println(" COP");
+   
     delay(100);
   }
   subida1 = digitalRead(botonIngresoPin);
@@ -44,11 +44,11 @@ void loop()
   {
     cuposdisponibles = cuposdisponibles+1;
     valorrecaudado = valorrecaudado+5000;
-    Serial.print("Cupos: ");
+    Serial.print("\t\nCupos: ");
   	Serial.print(cuposdisponibles);
-  	Serial.print("\tRecaudo = $");
+  	Serial.print("\t\nRecaudo = $");
   	Serial.print(valorrecaudado);
-    Serial.println(" COP");
+   
     delay(100);
   }
   subida2 = digitalRead(botonEgresoPin);
