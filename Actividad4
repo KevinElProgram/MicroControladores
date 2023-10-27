@@ -1,0 +1,91 @@
+const int sensorPin = A0;   
+int pot, t1, t2, t3; 
+float tension; 
+int conRojo = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(7, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(11, INPUT);
+  pinMode(10, INPUT);
+}
+
+void loop()
+{
+  pot = analogRead(sensorPin); 
+  tension = fmap(pot, 0, 1023, 0.0,6.0 );
+  conRojo++;
+
+  Serial.print("Tension: ");
+  Serial.print(tension); 
+  Serial.print("\tBits: ");
+  Serial.print(pot);
+  Serial.print("\tBombillo Rojo: ");
+  Serial.print(conRojo);
+
+ 
+  t1 = (6000 / tension)*2;
+  t2 = (1000 / tension)*2;
+  t3 = (3000 / tension)*2;
+
+  Serial.print("\tV Rojo: ");
+  Serial.print(t1);
+  Serial.print("\tV Amarillo: ");
+  Serial.print( t2);
+  Serial.print("\tV Verde: ");
+  Serial.println(t3);
+
+  bool 
+  botonX, botonZ;
+  botonX = digitalRead(11);
+  botonZ = digitalRead(10);
+
+  if (botonX == LOW && botonZ == LOW) 
+  {
+    digitalWrite(7, HIGH);
+    delay(t1);
+
+    digitalWrite(6, HIGH);
+    delay(t2);
+
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+
+    digitalWrite(5, HIGH);
+    delay(t3);
+
+    digitalWrite(5, LOW);
+
+    digitalWrite(6, HIGH);
+    delay(t2);
+    digitalWrite(6, LOW);
+  }
+
+  if (botonX == HIGH && botonZ == LOW) {
+    digitalWrite(6, HIGH);
+    delay(500);
+    digitalWrite(6, LOW);
+    delay(500);
+  }
+
+  if (botonX == HIGH && botonZ == HIGH) {
+    digitalWrite(6, HIGH);
+    delay(500);
+    digitalWrite(6, LOW);
+    delay(500);
+  }
+
+  if (botonX == LOW && botonZ == HIGH) {
+    digitalWrite(5, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+  }
+}
+
+float fmap(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
