@@ -1,0 +1,69 @@
+const int cupostotales = 10;  
+int cuposdisponibles = 10; 
+long int valorrecaudado = 0;
+int costo= 5000;
+
+bool subida1,subida2;
+const int botonIngresoPin = 11;  
+const int botonEgresoPin = 10;  
+const int led1 = 5;      
+const int led2 = 7;       
+
+int ingreso = 0;
+int egreso = 0;
+
+void setup() 
+{
+  pinMode(botonIngresoPin, INPUT);
+  pinMode(botonEgresoPin, INPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("CUPO MAXIMO: 10");
+}
+
+void loop() 
+{
+
+  ingreso = digitalRead (botonIngresoPin);
+  egreso = digitalRead (botonEgresoPin);
+  
+  if(ingreso == 1 && cuposdisponibles > 0 && subida1 == 0)
+  {
+    cuposdisponibles = cuposdisponibles -1;
+    Serial.print("Cupos: ");
+  	Serial.print(cuposdisponibles);
+  	Serial.print("\tRecaudo = $");
+  	Serial.print(valorrecaudado);
+    Serial.println(" COP");
+    delay(100);
+  }
+  subida1 = digitalRead(botonIngresoPin);
+  
+  if(egreso == HIGH && cuposdisponibles <10 && subida2==0)
+  {
+    cuposdisponibles = cuposdisponibles+1;
+    valorrecaudado = valorrecaudado+5000;
+    Serial.print("Cupos: ");
+  	Serial.print(cuposdisponibles);
+  	Serial.print("\tRecaudo = $");
+  	Serial.print(valorrecaudado);
+    Serial.println(" COP");
+    delay(100);
+  }
+  subida2 = digitalRead(botonEgresoPin);
+  
+  if(cuposdisponibles >0 && cuposdisponibles <=10)
+  {
+    digitalWrite(led2,LOW);
+    digitalWrite(led1,HIGH);
+  }  
+  
+  if(cuposdisponibles==0)
+  {
+    digitalWrite(led1,LOW);
+    digitalWrite(led2,HIGH);
+  }
+ 
+  delay(10); 
+}
